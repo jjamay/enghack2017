@@ -8,16 +8,17 @@ export const filters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-const getVisibleEvents = (events = [], isFetching, filter) => {
-  if (events.length === 0) {
-    return isFetching ? "Loading" : "No events"
-  }
-  switch (filter) {
-    case filters.SHOW_ALL:
-      return events
-    default:
-      throw new Error('Unknown filter: ' + filter)
-  }
+const getVisibleEvents = (items = [], isFetching, filter) => {
+  return items
+  // if (items.length === 0) {
+  //   return isFetching ? "Loading" : "No events"
+  // }
+  // switch (filter) {
+  //   case filters.SHOW_ALL:
+  //     return items
+  //   default:
+  //     throw new Error('Unknown filter: ' + filter)
+  // }
 }
 
 const mapStateToProps = state => {
@@ -25,14 +26,16 @@ const mapStateToProps = state => {
     isFetching,
     lastUpdated,
     visibilityFilter,
-    items: events
+    items
   } = state.events || {
     isFetching: true,
     visibilityFilter: filters.SHOW_ALL,
     items: []
   }
+  console.log(items + "L34")
+  console.log(typeof items)
   return {
-    events: getVisibleEvents(events, isFetching, visibilityFilter),
+    items: getVisibleEvents(items, isFetching, visibilityFilter),
     isFetching,
     lastUpdated
   }

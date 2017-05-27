@@ -28,11 +28,18 @@ export const requestEvents = () => ({
   type: REQUEST_EVENTS
 })
 
-export const receiveEvents = (json) => ({
+export const receiveEvents = (json) => {
+  console.log(json)
+  console.log(typeof json + " L33")
+  var result = Object.keys(json).map(function(e) {
+  return ;
+});
+return {
   type: RECEIVE_EVENTS,
-  events: json.data.children.map(child => child.data),
+  items: json,
   receivedAt: Date.now()
-})
+}
+}
 
 export const invalidateEvents = () => ({
   type: INVALIDATE_EVENTS
@@ -41,12 +48,11 @@ export const invalidateEvents = () => ({
 const fetchEvents = () => dispatch => {
   dispatch(requestEvents())
   return fetch(eGET_EVENTS)
-    .then(response => response.json())
     .then(json => dispatch(receiveEvents(json)))
 }
 
-const shouldFetchPosts = (state) => {
-  const events = state.events
+const shouldFetchEvents = (state) => {
+  const events = state.items
   if (!events) {
     return true
   }
@@ -57,7 +63,7 @@ const shouldFetchPosts = (state) => {
 }
 
 export const fetchEventsIfNeeded = () => (dispatch, getState) => {
-  if (shouldFetchPosts(getState())) {
+  if (shouldFetchEvents(getState())) {
     return dispatch(fetchEvents())
   }
 }

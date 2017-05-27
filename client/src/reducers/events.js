@@ -4,9 +4,9 @@ const event = (state, action) => {
   switch (action.type) {
     case ADD_EVENT:
       return {
-        id: action.id,
-        text: action.text,
-        completed: false
+        // id: action.id,
+        // text: action.text,
+        // completed: false
       }
     default:
       return state
@@ -31,11 +31,12 @@ const events = (state = {
         didInvalidate: false
       }
     case RECEIVE_EVENTS:
+    console.log(action.items)
       return {
         ...state,
         isFetching: false,
         didInvalidate: false,
-        events: action.events,
+        items: action.items,
         lastUpdated: action.receivedAt
       }
     case ADD_EVENT:

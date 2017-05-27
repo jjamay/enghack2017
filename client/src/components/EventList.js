@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Event from './Event'
 import { Button } from 'react-bootstrap'
 
-const EventList = ({ events, isFetching, lastUpdated, onEventClick, onRefreshClick }) => (
+const EventList = ({ items, isFetching, lastUpdated, onEventClick, onRefreshClick }) => (
   <div>
     <div>
       {lastUpdated &&
@@ -15,15 +15,8 @@ const EventList = ({ events, isFetching, lastUpdated, onEventClick, onRefreshCli
         <Button onClick={e => onRefreshClick(e)}>Refresh</Button>
       }
     </div>
-    {typeof events === 'string'
-    ? events 
-    : events.map(event =>
-      <Event
-        key={event.id}
-        event={event}
-        onClick={() => onEventClick(event.id)}
-      />
-    )}
+    
+    {items[0]}
   </div>
 )
 

@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Panel } from 'react-bootstrap'
 
-const Event = ({ onClick, event }) => (
-  <Panel header={`${event.location} ${event.roomNumber}`} onClick={onClick}>
-    Start Time: {event.startingTime}
-    End Time: {event.endingTime}
-    Serving Size: {event.servingSize}
-    Food: {event.foodType}
+const Event = ({ onClick, item }) => (
+  <Panel header={`${item.location} ${item.roomNumber}`} onClick={onClick}>
+    Start Time: {item.startingTime}
+    End Time: {item.endingTime}
+    Serving Size: {item.servingSize}
+    Food: {item.foodType}
   </Panel>
 )
 

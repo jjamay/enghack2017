@@ -19,7 +19,9 @@
     "react-dom": "15.4.0",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "semantic-ui": "2.2.7"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui": "2.2.7",
+    "thunk": "^0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
