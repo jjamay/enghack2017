@@ -135,23 +135,30 @@ module.exports = (router) => {
         throw err;
       }else {
         //see if the event has expired
-        events.forEach((event) => {
-          //check if the event has expired
-          if(currentTime.getTime() - event.expiringTime.getTime() >= 0){
-            event.state.upcoming = false;
-            event.state.ongoing = false;
-            event.state.expired = true;
-            //if the event has expired more than 2 hours, delete it
-            if(currentTime.getTime() - event.expiringTime.getTime() >= 7200000){
-              freeEvent.remove({ _id: event.id }, (err) => {
-                if(err) throw err;
-              });
-            }
-          }
+        var promise = new Promise((resolve, reject) => {
+
         });
 
-        //events expired within 2 hours will be sent
-        res.json(JSON.stringify(events));
+        // events.forEach((event) => {
+        //   //check if the event has expired
+        //   if(currentTime.getTime() - event.expiringTime.getTime() >= 0){
+        //     event.state.upcoming = false;
+        //     event.state.ongoing = false;
+        //     event.state.expired = true;
+        //     //if the event has expired more than 2 hours, delete it
+        //     if(currentTime.getTime() - event.expiringTime.getTime() >= 7200000){
+        //       freeEvent.remove({ _id: event.id }, (err) => {
+        //         if(err) throw err;
+        //       });
+        //     }
+        //   }
+        // });
+        // promise.then(()=> {
+        //   //events expired within 2 hours will be sent
+        //   res.json(JSON.stringify(events));
+        // });
+
+        res.json(events);
       }
     });
   });
@@ -191,4 +198,4 @@ module.exports = (router) => {
   });
 
   return router;
-} 
+}
