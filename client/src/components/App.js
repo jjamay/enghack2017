@@ -1,8 +1,8 @@
 import React from 'react'
 import TopNav from './TopNav'
 import Footer from './Footer'
-import AddFood from '../containers/AddFood'
-import VisibleFoodList from '../containers/VisibleFoodList'
+import AddEvent from '../containers/AddEvent'
+import VisibleEventList from '../containers/VisibleEventList'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 const App = () => (
@@ -11,8 +11,8 @@ const App = () => (
     <Grid>
       <Row>
         <Col xs={12} md={8}>
-          <AddFood />
-          <VisibleFoodList />
+          <AddEvent />
+          <VisibleEventList />
           <Footer />
         </Col>
       </Row>

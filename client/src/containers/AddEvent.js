@@ -1,14 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addFood } from '../actions'
-import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap'
+import { addEvent } from '../actions'
+import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap'
 
-let AddFood = ({ dispatch }) => {
+let AddEvent = ({ dispatch }) => {
   let name
 
   return (
     <div>
-      <form>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        if (!name.value.trim()) {
+          return
+        }
+        dispatch(addEvent(name.value))
+        name.value = ''}}
+      >
         <FormGroup controlId="formBasicText">
           <InputGroup>
             <FormControl
@@ -20,16 +27,7 @@ let AddFood = ({ dispatch }) => {
             />
             <FormControl.Feedback />
             <InputGroup.Button>
-              <Button 
-                type="submit"
-                onClick={() => {
-                  if (!name.value.trim()) {
-                    return
-                  }
-                  dispatch(addFood(name.value))
-                  name.value = ''
-                }}
-              >Add Food</Button>
+              <Button type="submit">Add Event</Button>
             </InputGroup.Button>
           </InputGroup>
         </FormGroup>
@@ -37,6 +35,6 @@ let AddFood = ({ dispatch }) => {
     </div>
   )
 }
-AddFood = connect()(AddFood)
+AddEvent = connect()(AddEvent)
 
-export default AddFood
+export default AddEvent

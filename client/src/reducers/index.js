@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import foods from './foods'
+import events from './events'
 import visibilityFilter from './visibilityFilter'
 
-const foodApp = combineReducers({
-  foods,
+const eventApp = combineReducers({
+  events,
   visibilityFilter
 })
 
-export default foodApp
+export default eventApp
