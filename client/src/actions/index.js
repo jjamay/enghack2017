@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import axios from 'axios'
 
 // api endpoints
 const eGET_EVENTS = '/api/getEvents'
@@ -11,12 +11,20 @@ export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const POST_EVENTS = 'POST_EVENTS'
 export const INVALIDATE_EVENTS = 'INVALIDATE_EVENTS'
+export const TOGGLE_ADD_BUTTON = 'TOGGLE_ADD_BUTTON'
 
 let nextEventId = 0
-export const addEvent = (text) => ({
+export const addEvent = (location, roomNumber, foodType, startingTime, endingTime, servingSize) => ({
   type: ADD_EVENT,
   id: nextEventId++,
-  text
+  event: {
+    location,
+    roomNumber,
+    foodType,
+    startingTime,
+    endingTime,
+    servingSize
+  }
 })
 
 export const setVisibilityFilter = (filter) => ({
@@ -30,16 +38,16 @@ export const requestEvents = () => ({
 
 export const receiveEvents = (json) => {
   console.log(json)
-  console.log(typeof json + " L33")
-  var result = Object.keys(json).map(function(e) {
-  return ;
-});
-return {
-  type: RECEIVE_EVENTS,
-  items: json,
-  receivedAt: Date.now()
+  return {
+    type: RECEIVE_EVENTS,
+    items: json.data,
+    receivedAt: Date.now()
+  }
 }
-}
+
+export const toggleAddButton = () => ({
+  type: TOGGLE_ADD_BUTTON
+})
 
 export const invalidateEvents = () => ({
   type: INVALIDATE_EVENTS
@@ -47,7 +55,7 @@ export const invalidateEvents = () => ({
 
 const fetchEvents = () => dispatch => {
   dispatch(requestEvents())
-  return fetch(eGET_EVENTS)
+  return axios.get(eGET_EVENTS)
     .then(json => dispatch(receiveEvents(json)))
 }
 

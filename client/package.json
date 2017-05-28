@@ -13,6 +13,7 @@
     "babel-plugin-transform-class-properties": "6.22.0",
     "create-react-class": "^15.5.3",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "15.4.0",
     "react-bootstrap": "^0.31.0",

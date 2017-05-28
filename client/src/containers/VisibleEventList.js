@@ -9,33 +9,29 @@ export const filters = {
 }
 
 const getVisibleEvents = (items = [], isFetching, filter) => {
-  return items
-  // if (items.length === 0) {
-  //   return isFetching ? "Loading" : "No events"
-  // }
-  // switch (filter) {
-  //   case filters.SHOW_ALL:
-  //     return items
-  //   default:
-  //     throw new Error('Unknown filter: ' + filter)
-  // }
+  if (items.length === 0) {
+    return isFetching ? "Loading" : "No events"
+  }
+  switch (filter) {
+    case filters.SHOW_ALL:
+      return items
+    default:
+      throw new Error('Unknown filter: ' + filter)
+  }
 }
 
 const mapStateToProps = state => {
   const {
     isFetching,
     lastUpdated,
-    visibilityFilter,
     items
   } = state.events || {
     isFetching: true,
-    visibilityFilter: filters.SHOW_ALL,
     items: []
   }
-  console.log(items + "L34")
-  console.log(typeof items)
+  const visibilityFilter = state.visibilityFilter
   return {
-    items: getVisibleEvents(items, isFetching, visibilityFilter),
+    events: [...getVisibleEvents(items, isFetching, visibilityFilter)],
     isFetching,
     lastUpdated
   }

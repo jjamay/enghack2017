@@ -4,9 +4,12 @@ const event = (state, action) => {
   switch (action.type) {
     case ADD_EVENT:
       return {
-        // id: action.id,
-        // text: action.text,
-        // completed: false
+        location: action.event.location,
+        roomNumber: action.event.roomNumber,
+        foodType: action.event.foodType,
+        startingTime: action.event.startingTime,
+        endingTime: action.event.endingTime,
+        servingSize: action.event.servingSize
       }
     default:
       return state
@@ -31,7 +34,6 @@ const events = (state = {
         didInvalidate: false
       }
     case RECEIVE_EVENTS:
-    console.log(action.items)
       return {
         ...state,
         isFetching: false,
